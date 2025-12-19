@@ -28,16 +28,18 @@ let alternate = [
 "Wildlife-Cows",
 ];
 
+                                                            // final version 
+
 
 const dialogRef = document.getElementById('myDialog');
     let currentIndex;                                       //empty variable to recieve value
     let currentHeadIndex;
  
 
-function openDialog(index){                             // opens dialog on onclick
+function openDialog(index){                                 // opens dialog on onclick
     dialogRef.showModal();
     currentImg(index); 
-    currentHeadline(index);                                     //rendering your img into dialog that was selected
+    currentHeadline(index);                                 //rendering your img into dialog that was selected
 }
 
 function currentImg(index){  
@@ -45,26 +47,33 @@ function currentImg(index){
     diaCont.innerHTML = getImgsHtml(index);
     currentIndex = index;
 }
-function currentHeadline(index){                        //rendering the headline into dialog
+function currentHeadline(index){                            //rendering the headline into dialog
     let headCont = document.getElementById('dialogTitle');
     headCont.innerHTML = alternate[index];
     currentHeadIndex = index;
 }
 
 
-function showNext(){                                     // function for rendering the next img from the array
+function showNext(){                                        // function for rendering the next img from the array
     if(currentIndex == fotogramImgs.length-1){
-    index = 0;
+    currentIndex = 0;
+    index = currentIndex;
+    let diaCont = document.getElementById('dia_cont');
+    diaCont.innerHTML =  getImgsHtml(index);
     }  
     else{
     currentIndex++;
     index = currentIndex;
     let diaCont = document.getElementById('dia_cont');
     diaCont.innerHTML =  getImgsHtml(index);
-    }                                //index for headline
+    }                                                       //index for headline
     if(currentHeadIndex == alternate.length-1){
-    index = 0;
-    }else{currentHeadIndex++;
+    currentHeadIndex = 0;
+    index = currentHeadIndex;
+    let headCont = document.getElementById('dialogTitle');
+    headCont.innerHTML = alternate[index];
+    }else{
+    currentHeadIndex++;
     index = currentHeadIndex;
     let headCont = document.getElementById('dialogTitle');
     headCont.innerHTML = alternate[index];
@@ -72,10 +81,12 @@ function showNext(){                                     // function for renderi
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
 function showPrev(){                                    // function for rendering the previos img from the array
     if(currentIndex == fotogramImgs.length-12){
-    index = 0;
+    currentIndex = 11;
+    index = currentIndex;
+    let diaCont = document.getElementById('dia_cont');
+    diaCont.innerHTML =  getImgsHtml(index);
     }else{
     currentIndex--;
     index = currentIndex;
@@ -83,7 +94,10 @@ function showPrev(){                                    // function for renderin
     diaCont.innerHTML =  getImgsHtml(index);
     }
     if(currentHeadIndex == alternate.length-12){
-    index = 0;
+    currentHeadIndex = 11;
+    index = currentHeadIndex;
+    let headCont = document.getElementById('dialogTitle');
+    headCont.innerHTML = alternate[index];
     }else{
     currentHeadIndex--;
     index = currentHeadIndex;
@@ -101,7 +115,7 @@ function closeDialog(){                                 // function to close the
 function bubblingPrevention(event){
     event.stopPropagation();
 }
-function render(){                                  // rendeing the imgs from the array into the HTML
+function render(){                                      // rendeing the imgs from the array into the HTML
     let contentRef = document.getElementById('content');
     contentRef.innerHTML ="";
     for(let index = 0; index < fotogramImgs.length; index++) {

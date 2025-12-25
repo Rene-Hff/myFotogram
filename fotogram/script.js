@@ -1,4 +1,4 @@
-let fotogramImgs = [
+const fotogramImgs = [
 "img/acorns-5646979_640.jpg", 
 "img/autumn-5709408_640.jpg", 
 "img/cats-eyes-2944820_640.jpg", 
@@ -12,7 +12,7 @@ let fotogramImgs = [
 "img/tree-99852_640.jpg",
 "img/wildlife-9653797_640.jpg"
 ];
-let alternate = [
+const alternate = [
 "Acorns",
 "Autumn",
 "Cats-Eyes",
@@ -28,24 +28,28 @@ let alternate = [
 ];
 
 const dialogRef = document.getElementById('myDialog');
-    let currentIndex;                                       //empty variable to recieve value
+    let currentIndex;                                      
     let currentHeadIndex;
-function openDialog(index){                                 // opens dialog on onclick
+
+function openDialog(index){                              
     dialogRef.showModal();
     currentImg(index); 
-    currentHeadline(index);                                 //rendering your img into dialog that was selected
-}
+    currentHeadline(index);                                 
+};
+
 function currentImg(index){  
     let diaCont = document.getElementById('dia_cont');
     diaCont.innerHTML = getImgsHtml(index);
     currentIndex = index;
-}
-function currentHeadline(index){                            //rendering the headline into dialog
+};
+
+function currentHeadline(index){                            
     let headCont = document.getElementById('dialogTitle');
     headCont.innerHTML = alternate[index];
     currentHeadIndex = index;
-}
-function showNext(){                                        // function for rendering the next img from the array
+};
+
+function showNextImg(){                                        
     if(currentIndex == fotogramImgs.length-1){
         currentIndex = 0;
         index = currentIndex;
@@ -57,7 +61,10 @@ function showNext(){                                        // function for rend
         index = currentIndex;
         let diaCont = document.getElementById('dia_cont');
         diaCont.innerHTML =  getImgsHtml(index);
-    }                                                       //index for headline
+    }
+};
+
+function showNextTitle(){                                                    
     if(currentHeadIndex == alternate.length-1){
         currentHeadIndex = 0;
         index = currentHeadIndex;
@@ -69,11 +76,9 @@ function showNext(){                                        // function for rend
         let headCont = document.getElementById('dialogTitle');
         headCont.innerHTML = alternate[index];
     }
-}
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            // seperation button functions //
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-function showPrev(){                                    // function for rendering the previos img from the array
+};
+
+function showPrevImg(){                                    
     if(currentIndex == fotogramImgs.length-12){
         currentIndex = 11;
         index = currentIndex;
@@ -85,6 +90,9 @@ function showPrev(){                                    // function for renderin
         let diaCont = document.getElementById('dia_cont');
         diaCont.innerHTML =  getImgsHtml(index);
     }
+};
+
+function showPrevTitle(){
     if(currentHeadIndex == alternate.length-12){
         currentHeadIndex = 11;
         index = currentHeadIndex;
@@ -96,20 +104,24 @@ function showPrev(){                                    // function for renderin
         let headCont = document.getElementById('dialogTitle');
         headCont.innerHTML = alternate[index];
     }
-}
-function closeDialog(){                                 // function to close the dialog
+};
+
+function closeDialog(){                                 
     dialogRef.close();
-}
+};
+
 function bubblingPrevention(event){
     event.stopPropagation();
-}
-function render(){                                      // rendeing the imgs from the array into the HTML
+};
+
+function render(){                                      
     let contentRef = document.getElementById('content');
     contentRef.innerHTML ="";
     for(let index = 0; index < fotogramImgs.length; index++) {
         contentRef.innerHTML += getImgsHtml(index);
     }
-}
-function getImgsHtml(index) {                           // get the img from the HTML for rendering into the dialog
+};
+
+function getImgsHtml(index) {                          
     return `<button type="button" onclick="openDialog(${index})"  class="single_img"><img src="${fotogramImgs[index]}" alt="${alternate[index]}" aria-haspopup="dialog" aria-controls="myDialog" onclick="openDialog(${index})"></button>`
-}
+};

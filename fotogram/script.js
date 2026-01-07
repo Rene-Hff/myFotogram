@@ -51,33 +51,35 @@ function currentHeadline(index){
 function increaseIndex(){
     if(currentIndex  == fotogramImgs.length-1){
         currentIndex = 0;
-        renderCurrentImg(currentIndex);
-        currentHeadline(currentIndex);
-    } else{
+    renderCurrentImg(currentIndex);
+    currentHeadline(currentIndex);
+    } 
+    else{
         currentIndex++;
-        renderCurrentImg(currentIndex);
-        currentHeadline(currentIndex);
+    renderCurrentImg(currentIndex);
+    currentHeadline(currentIndex);
     }
-}
+};
 function decreaseIndex(){
     if(currentIndex == fotogramImgs.length-12){
         currentIndex = 11;
-        renderCurrentImg(currentIndex);
-        currentHeadline(currentIndex);
-    } else{
-        currentIndex--;
-        renderCurrentImg(currentIndex);
-        currentHeadline(currentIndex);
+    renderCurrentImg(currentIndex);
+    currentHeadline(currentIndex);
     }
-}
+    else{
+        currentIndex--;
+    renderCurrentImg(currentIndex);
+    currentHeadline(currentIndex);
+    }
+};
 function slideImg(direction){
-        if(direction == 'right'){
-        increaseIndex();
-        }
-        else if(direction == 'left'){
-        decreaseIndex();
-        }
-}
+    if(direction == 'right'){
+    increaseIndex();
+    }
+    else if(direction == 'left'){
+    decreaseIndex();
+    }
+};
 
 function closeDialog(){                                 
     dialogRef.close();
@@ -91,7 +93,7 @@ function render(){
     let contentRef = document.getElementById('content');
     contentRef.innerHTML ="";
     for(let index = 0; index < fotogramImgs.length; index++) {
-        contentRef.innerHTML += getImgsHtml(index);
+    contentRef.innerHTML += getImgsHtml(index);
     }
 };
 
@@ -100,4 +102,4 @@ function getImgsHtml(currentImg) {
 };
 function renderDialogContentImg(index){
     return `<button class="single_img"><img src="${fotogramImgs[index]}" alt="${alternate[index]}" aria-haspopup="dialog" aria-controls="myDialog"></button>`
-}
+};

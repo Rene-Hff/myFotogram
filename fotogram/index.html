@@ -26,13 +26,13 @@
                     <h2 id="dialogTitle" aria-labelledby="dialogTitle" aria-describedby="dialogDescr" ></h2>
                 </header>
                 <section>
-                   <div id="dia_cont" onclick="bubblingPrevention(event); showNextImg(); showNextTitle()">
+                   <div id="dia_cont" onclick="bubblingPrevention(event)">
                     </div>
                 </section>
                 <footer onclick="bubblingPrevention(event)">
-                    <button id="previousBtn" class="btns" onclick="showPrevImg(); showPrevTitle()"> - </button>
+                    <button id="previousBtn" class="btns" onclick="slideImg('left', 0, 0)"> - </button>
                     <button class="btns" aria-label="close-dialog" onclick="closeDialog()"> X </button>
-                    <button id="forwardBtn" class="btns" onclick="showNextImg(); showNextTitle()"> + </button>  
+                    <button id="forwardBtn" class="btns" onclick="slideImg('right', 0, 0)"> + </button>  
                 </footer>
             </dialog>
         </section>

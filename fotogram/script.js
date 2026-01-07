@@ -28,83 +28,56 @@ const alternate = [
 ];
 
 const dialogRef = document.getElementById('myDialog');
-    let currentIndex;                                      
-    let currentHeadIndex;
+let currentIndex;                                      
 
-function openDialog(index){                              
+function openDialog(currentImg){                              
     dialogRef.showModal();
-    currentImg(index); 
-    currentHeadline(index);                                 
+    renderCurrentImg(currentImg);
+    currentHeadline(currentIndex);                                
 };
 
-function currentImg(index){  
+function renderCurrentImg(index){  
     let diaCont = document.getElementById('dia_cont');
-    diaCont.innerHTML = getImgsHtml(index);
+    diaCont.innerHTML = renderDialogContentImg(index);
     currentIndex = index;
 };
 
 function currentHeadline(index){                            
     let headCont = document.getElementById('dialogTitle');
     headCont.innerHTML = alternate[index];
-    currentHeadIndex = index;
+    currentIndex = index;       
 };
 
-function showNextImg(){                                        
-    if(currentIndex == fotogramImgs.length-1){
+function increaseIndex(){
+    if(currentIndex  == fotogramImgs.length-1){
         currentIndex = 0;
-        index = currentIndex;
-        let diaCont = document.getElementById('dia_cont');
-        diaCont.innerHTML =  getImgsHtml(index);
-    }  
-    else{
+        renderCurrentImg(currentIndex);
+        currentHeadline(currentIndex);
+    } else{
         currentIndex++;
-        index = currentIndex;
-        let diaCont = document.getElementById('dia_cont');
-        diaCont.innerHTML =  getImgsHtml(index);
+        renderCurrentImg(currentIndex);
+        currentHeadline(currentIndex);
     }
-};
-
-function showNextTitle(){                                                    
-    if(currentHeadIndex == alternate.length-1){
-        currentHeadIndex = 0;
-        index = currentHeadIndex;
-        let headCont = document.getElementById('dialogTitle');
-        headCont.innerHTML = alternate[index];
-    }else{
-        currentHeadIndex++;
-        index = currentHeadIndex;
-        let headCont = document.getElementById('dialogTitle');
-        headCont.innerHTML = alternate[index];
-    }
-};
-
-function showPrevImg(){                                    
+}
+function decreaseIndex(){
     if(currentIndex == fotogramImgs.length-12){
         currentIndex = 11;
-        index = currentIndex;
-        let diaCont = document.getElementById('dia_cont');
-        diaCont.innerHTML =  getImgsHtml(index);
-    }else{
+        renderCurrentImg(currentIndex);
+        currentHeadline(currentIndex);
+    } else{
         currentIndex--;
-        index = currentIndex;
-        let diaCont = document.getElementById('dia_cont');
-        diaCont.innerHTML =  getImgsHtml(index);
+        renderCurrentImg(currentIndex);
+        currentHeadline(currentIndex);
     }
-};
-
-function showPrevTitle(){
-    if(currentHeadIndex == alternate.length-12){
-        currentHeadIndex = 11;
-        index = currentHeadIndex;
-        let headCont = document.getElementById('dialogTitle');
-        headCont.innerHTML = alternate[index];
-    }else{
-        currentHeadIndex--;
-        index = currentHeadIndex;
-        let headCont = document.getElementById('dialogTitle');
-        headCont.innerHTML = alternate[index];
-    }
-};
+}
+function slideImg(direction){
+        if(direction == 'right'){
+        increaseIndex();
+        }
+        else if(direction == 'left'){
+        decreaseIndex();
+        }
+}
 
 function closeDialog(){                                 
     dialogRef.close();
@@ -122,6 +95,9 @@ function render(){
     }
 };
 
-function getImgsHtml(index) {                          
-    return `<button type="button" onclick="openDialog(${index})"  class="single_img"><img src="${fotogramImgs[index]}" alt="${alternate[index]}" aria-haspopup="dialog" aria-controls="myDialog" onclick="openDialog(${index})"></button>`
+function getImgsHtml(currentImg) {                          
+    return `<button type="button" onclick="openDialog(${currentImg})"  class="single_img"><img src="${fotogramImgs[currentImg]}" alt="${alternate[currentImg]}" aria-haspopup="dialog" aria-controls="myDialog"></button>`
 };
+function renderDialogContentImg(index){
+    return `<button class="single_img"><img src="${fotogramImgs[index]}" alt="${alternate[index]}" aria-haspopup="dialog" aria-controls="myDialog"></button>`
+}
